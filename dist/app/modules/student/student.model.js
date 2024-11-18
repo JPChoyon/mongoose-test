@@ -3,43 +3,127 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentModel = void 0;
 const mongoose_1 = require("mongoose");
 const studentNameSchema = new mongoose_1.Schema({
-    firstName: { type: String, required: true },
+    firstName: {
+        type: String,
+        required: [true, 'First name is required.'],
+    },
     middleName: { type: String },
-    lastName: { type: String, required: true },
+    lastName: {
+        type: String,
+        required: [true, 'Last name is required.'],
+    },
 });
 const guardianSchema = new mongoose_1.Schema({
-    fatherName: { type: String, required: true },
-    fatherOccupation: { type: String, required: true },
-    fatherContactNo: { type: String, required: true },
-    motherName: { type: String, required: true },
-    motherOccupation: { type: String, required: true },
-    motherContactNo: { type: String, required: true },
+    fatherName: {
+        type: String,
+        required: [true, 'Father name is required.'],
+    },
+    fatherOccupation: {
+        type: String,
+        required: [true, 'Father occupation is required.'],
+    },
+    fatherContactNo: {
+        type: String,
+        required: [true, 'Father contact number is required.'],
+    },
+    motherName: {
+        type: String,
+        required: [true, 'Mother name is required.'],
+    },
+    motherOccupation: {
+        type: String,
+        required: [true, 'Mother occupation is required.'],
+    },
+    motherContactNo: {
+        type: String,
+        required: [true, 'Mother contact number is required.'],
+    },
 });
 const localGuardianSchema = new mongoose_1.Schema({
-    name: { type: String, required: true },
-    occupation: { type: String, required: true },
-    contactNo: { type: String, required: true },
-    address: { type: String, required: true },
+    name: {
+        type: String,
+        required: [true, 'Local guardian name is required.'],
+    },
+    occupation: {
+        type: String,
+        required: [true, 'Local guardian occupation is required.'],
+    },
+    contactNo: {
+        type: String,
+        required: [true, 'Local guardian contact number is required.'],
+    },
+    address: {
+        type: String,
+        required: [true, 'Local guardian address is required.'],
+    },
 });
 const studentSchema = new mongoose_1.Schema({
-    id: { type: String, required: true, unique: true },
-    name: { type: studentNameSchema, required: true },
-    gender: { type: String, enum: ['male', 'female', 'other'], required: true },
-    email: { type: String, required: true },
-    dateOfBirth: { type: String, required: true },
-    contactNo: { type: String, required: true },
-    emergencyContactNo: { type: String, required: true },
+    id: {
+        type: String,
+        required: [true, 'Student ID is required.'],
+        unique: true,
+    },
+    name: {
+        type: studentNameSchema,
+        required: [true, 'Student name is required.'],
+    },
+    gender: {
+        type: String,
+        enum: {
+            values: ['male', 'female', 'other'],
+            message: 'Gender must be male, female, or other.',
+        },
+        required: [true, 'Gender is required.'],
+    },
+    email: {
+        type: String,
+        required: [true, 'Email is required.'],
+        match: [/^\S+@\S+\.\S+$/, 'Invalid email format.'],
+    },
+    dateOfBirth: {
+        type: String,
+        required: [true, 'Date of birth is required.'],
+    },
+    contactNo: {
+        type: String,
+        required: [true, 'Contact number is required.'],
+    },
+    emergencyContactNo: {
+        type: String,
+        required: [true, 'Emergency contact number is required.'],
+    },
     bloodGroup: {
         type: String,
-        enum: ['A+', 'A-', 'AB+', 'AB-', 'B+', 'B-', 'O+', 'O-'],
-        required: true,
+        enum: {
+            values: ['A+', 'A-', 'AB+', 'AB-', 'B+', 'B-', 'O+', 'O-'],
+            message: 'Invalid blood group.',
+        },
+        required: [true, 'Blood group is required.'],
     },
-    presentAddress: { type: String, required: true },
-    permanentAddress: { type: String, required: true },
-    guardian: { type: guardianSchema, required: true },
-    localGuardian: { type: localGuardianSchema, required: true },
+    presentAddress: {
+        type: String,
+        required: [true, 'Present address is required.'],
+    },
+    permanentAddress: {
+        type: String,
+        required: [true, 'Permanent address is required.'],
+    },
+    guardian: {
+        type: guardianSchema,
+        required: [true, 'Guardian information is required.'],
+    },
+    localGuardian: {
+        type: localGuardianSchema,
+        required: [true, 'Local guardian information is required.'],
+    },
     profileImg: { type: String },
-    isActive: { type: String, enum: ['active', 'blocked'] },
+    isActive: {
+        type: String,
+        enum: {
+            values: ['active', 'blocked'],
+            message: 'Status must be active or blocked.',
+        },
+    },
 });
 // create model
 exports.StudentModel = (0, mongoose_1.model)('Student', studentSchema);
