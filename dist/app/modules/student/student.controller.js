@@ -26,7 +26,7 @@ const createStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 error: error.details,
             });
         }
-        const result = yield student_service_1.StudentServices.studentCreateDb(student);
+        const result = yield student_service_1.StudentServices.studentCreateDb(value);
         res.status(200).send({
             success: true,
             message: 'student create successfully',
