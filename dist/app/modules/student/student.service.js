@@ -12,15 +12,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentServices = void 0;
 const student_model_1 = require("./student.model");
 const studentCreateDb = (student) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield student_model_1.StudentModel.create(student);
+    const result = student_model_1.Student.create(student);
+    if (yield student_model_1.Student.isStudentExist(student.id)) {
+        throw new Error('Student already exits');
+    }
+    // instance method
+    // const studentData = new Student(student);
+    // if (await studentData.isStudentExist(studentData.id)) {
+    //   throw new Error('Student already exits');
+    // }
+    // const result = await studentData.save();
     return result;
 });
 const studentFindDb = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield student_model_1.StudentModel.find();
+    const result = yield student_model_1.Student.find();
     return result;
 });
 const studentFindOneDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield student_model_1.StudentModel.findOne({ id });
+    const result = yield student_model_1.Student.findOne({ id });
     return result;
 });
 exports.StudentServices = {

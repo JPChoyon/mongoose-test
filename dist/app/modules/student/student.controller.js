@@ -18,15 +18,15 @@ const student_validation_1 = __importDefault(require("./student.validation"));
 const createStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const student = req.body.student;
-        const { error, value } = student_validation_1.default.validate(student);
-        if (error) {
-            res.status(500).send({
-                success: false,
-                message: 'something went wrong',
-                error: error.details,
-            });
-        }
-        const result = yield student_service_1.StudentServices.studentCreateDb(value);
+        const zodData = student_validation_1.default.parse(student);
+        // if (error) {
+        //   res.status(500).send({
+        //     success: false,
+        //     message: 'something went wrong',
+        //     error: error.details,
+        //   });
+        // }
+        const result = yield student_service_1.StudentServices.studentCreateDb(zodData);
         res.status(200).send({
             success: true,
             message: 'student create successfully',

@@ -6,16 +6,16 @@ import studentValidationSchema from './student.validation';
 const createStudent = async (req: Request, res: Response) => {
   try {
     const student = req.body.student;
-    const { error, value } = studentValidationSchema.validate(student);
+    const zodData = studentValidationSchema.parse(student);
 
-    if (error) {
-      res.status(500).send({
-        success: false,
-        message: 'something went wrong',
-        error: error.details,
-      });
-    }
-    const result = await StudentServices.studentCreateDb(value);
+    // if (error) {
+    //   res.status(500).send({
+    //     success: false,
+    //     message: 'something went wrong',
+    //     error: error.details,
+    //   });
+    // }
+    const result = await StudentServices.studentCreateDb(zodData);
     res.status(200).send({
       success: true,
       message: 'student create successfully',
