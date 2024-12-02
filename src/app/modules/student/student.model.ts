@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import {
-  
   StudentModel,
   TGuardian,
   TLocalGuardian,
@@ -72,6 +71,12 @@ const studentSchema = new Schema<TStudent>({
     required: [true, 'Student ID is required.'],
     unique: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    required: [true, 'Must need user id'],
+    unique: true,
+    ref: 'User',
+  },
   name: {
     type: studentNameSchema,
     required: [true, 'Student name is required.'],
@@ -126,26 +131,13 @@ const studentSchema = new Schema<TStudent>({
     required: [true, 'Local guardian information is required.'],
   },
   profileImg: { type: String },
-  isActive: {
-    type: String,
-    enum: {
-      values: ['active', 'blocked'],
-      default: 'active',
-      message: 'Status must be active or blocked.',
-    },
-  },
+  isDeleted: { type: Boolean, default: false },
 });
 // creating a static method
 studentSchema.statics.isStudentExist = async function (id: string) {
   const existingStudent = await Student.findOne({ id });
   return existingStudent;
 };
-
-// custom instance method
-// studentSchema.method('isStudentExist', async function (id: string) {
-//   const existingStudent = await Student.findOne({ id });
-//   return existingStudent;
-// });
 
 // create model
 export const Student = model<TStudent, StudentModel>('Student', studentSchema);
