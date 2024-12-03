@@ -8,37 +8,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StudentController = void 0;
-const student_service_1 = require("./student.service");
-const findStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.userController = void 0;
+const user_service_1 = require("./user.service");
+const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
+const http_status_1 = __importDefault(require("http-status"));
+const createStudent = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield student_service_1.StudentServices.studentFindDb();
-        res.status(200).send({
+        const { password, student: studentData } = req.body;
+        console.log(password, student);
+        const result = yield user_service_1.userServices.studentCreateDb(password, studentData);
+        (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.OK,
             success: true,
-            message: 'student find successfully',
+            message: 'Student is created successfully',
             data: result,
         });
     }
     catch (err) {
-        console.log(err);
+        next(err);
     }
 });
-const findOneStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const id = req.params.id;
-        const result = yield student_service_1.StudentServices.studentFindOneDb(id);
-        res.status(200).send({
-            success: true,
-            message: 'single student find successfully',
-            data: result,
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
-exports.StudentController = {
-    findStudent,
-    findOneStudent,
+exports.userController = {
+    createStudent,
 };

@@ -2,7 +2,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { userServices } from './user.service';
 import sendResponse from '../../utils/sendResponse';
-import httpStatus from 'http-status';
+import httpStatus from 'http-status-codes';
 
 const createStudent = async (
   req: Request,
@@ -11,7 +11,7 @@ const createStudent = async (
 ) => {
   try {
     const { password, student: studentData } = req.body;
-    console.log(password, student);
+    // console.log(password, student);
 
     const result = await userServices.studentCreateDb(password, studentData);
     sendResponse(res, {

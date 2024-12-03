@@ -11,19 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentServices = void 0;
 const student_model_1 = require("./student.model");
-const studentCreateDb = (student) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = student_model_1.Student.create(student);
-    if (yield student_model_1.Student.isStudentExist(student.id)) {
-        throw new Error('Student already exits');
-    }
-    // instance method
-    // const studentData = new Student(student);
-    // if (await studentData.isStudentExist(studentData.id)) {
-    //   throw new Error('Student already exits');
-    // }
-    // const result = await studentData.save();
-    return result;
-});
 const studentFindDb = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield student_model_1.Student.find();
     return result;

@@ -1,4 +1,4 @@
-import { TStudent } from './student.interface';
+
 import { Student } from './student.model';
 
 
@@ -14,7 +14,6 @@ const studentFindOneDb = async (id: string) => {
 };
 
 export const StudentServices = {
-  studentCreateDb,
   studentFindDb,
   studentFindOneDb,
 };
