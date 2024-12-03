@@ -20,7 +20,6 @@ const studentFindOneDb = (id) => __awaiter(void 0, void 0, void 0, function* () 
     return result;
 });
 exports.StudentServices = {
-    studentCreateDb,
     studentFindDb,
     studentFindOneDb,
 };
