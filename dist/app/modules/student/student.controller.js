@@ -8,36 +8,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentController = void 0;
 const student_service_1 = require("./student.service");
-const findStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = yield student_service_1.StudentServices.studentFindDb();
-        res.status(200).send({
-            success: true,
-            message: 'student find successfully',
-            data: result,
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
-const findOneStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const id = req.params.id;
-        const result = yield student_service_1.StudentServices.studentFindOneDb(id);
-        res.status(200).send({
-            success: true,
-            message: 'single student find successfully',
-            data: result,
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
+const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
+const findStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield student_service_1.StudentServices.studentFindDb();
+    res.status(200).send({
+        success: true,
+        message: 'student find successfully',
+        data: result,
+    });
+}));
+const findOneStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const result = yield student_service_1.StudentServices.studentFindOneDb(id);
+    res.status(200).send({
+        success: true,
+        message: 'single student find successfully',
+        data: result,
+    });
+}));
 exports.StudentController = {
     findStudent,
     findOneStudent,

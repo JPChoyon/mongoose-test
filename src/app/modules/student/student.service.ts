@@ -1,7 +1,4 @@
-
 import { Student } from './student.model';
-
-
 
 const studentFindDb = async () => {
   const result = await Student.find();
