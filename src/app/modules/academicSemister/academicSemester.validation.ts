@@ -1,14 +1,18 @@
 import { z } from 'zod';
+import {
+  AcademicSemesterCode,
+  AcademicSemesterName,
+  Months,
+} from './academicSemester.constain';
 
 const academicSemesterValidationSchema = z.object({
-  password: z
-    .string({ invalid_type_error: 'password must be string' })
-    .max(20, { message: 'Password cannot be more than 20' })
-    .optional(),
-  needsPasswordChange: z.boolean().optional().default(false),
-  role: z.enum(['admin', 'student', 'faculty']),
-  status: z.enum(['in-progress', 'blocked']).default('in-progress'),
-  isDeleted: z.boolean().optional().default(false),
+  body: z.object({
+    name: z.enum([...AcademicSemesterName] as [string, string]),
+    year: z.date(),
+    code: z.enum([...AcademicSemesterCode] as [string, string]),
+    startMonth: z.enum([...Months] as [string, string]),
+    endMonth: z.enum([...Months] as [string, string]),
+  }),
 });
 
 export const academicSemesterValidations = {
