@@ -17,7 +17,7 @@ const user_service_1 = require("./user.service");
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
-const createStudent = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const createStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { password, student: studentData } = req.body;
     const result = yield user_service_1.userServices.studentCreateDb(password, studentData);
     (0, sendResponse_1.default)(res, {

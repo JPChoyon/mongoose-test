@@ -133,6 +133,9 @@ const studentSchema = new mongoose_1.Schema({
     },
     profileImg: { type: String },
     isDeleted: { type: Boolean, default: false },
+}, {
+    timestamps: true,
+    versionKey: false,
 });
 // creating a static method
 studentSchema.statics.isStudentExist = function (id) {

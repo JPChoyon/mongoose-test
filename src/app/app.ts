@@ -1,18 +1,16 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { StudentRoutes } from './modules/student/student.route';
-import { UserRoutes } from './modules/users/user.router';
 import notFound from './middlewares/notFound';
 import globalErrorHandler from './middlewares/globalErrorHandler';
+import router from './routes';
 const app = express();
 
 // parser / middleware
 app.use(express.json());
 app.use(cors());
 
-// api call from here
-app.use('/api/v1/students', StudentRoutes);
-app.use('/api/v1/users', UserRoutes);
+// application routes
+app.use('/api/v1', router);
 
 const getAController = (req: Request, res: Response) => {
   res.send('Hello World!');
