@@ -1,9 +1,10 @@
 import { Schema, model } from 'mongoose';
+import { TAcademicSemester } from './academicSemester.interface';
 import {
-  TAcademicSemester,
-} from './academicSemester.interface';
-import { AcademicSemesterCode, AcademicSemesterName, Months } from './academicSemester.constain';
-
+  AcademicSemesterCode,
+  AcademicSemesterName,
+  Months,
+} from './academicSemester.constain';
 
 const academicSemesterSchema = new Schema<TAcademicSemester>(
   {
@@ -34,6 +35,7 @@ const academicSemesterSchema = new Schema<TAcademicSemester>(
   },
   {
     timestamps: true,
+    versionKey: false,
   },
 );
 
