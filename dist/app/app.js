@@ -5,17 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const student_route_1 = require("./modules/student/student.route");
-const user_router_1 = require("./modules/users/user.router");
 const notFound_1 = __importDefault(require("./middlewares/notFound"));
 const globalErrorHandler_1 = __importDefault(require("./middlewares/globalErrorHandler"));
+const routes_1 = __importDefault(require("./routes"));
 const app = (0, express_1.default)();
 // parser / middleware
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-// api call from here
-app.use('/api/v1/students', student_route_1.StudentRoutes);
-app.use('/api/v1/users', user_router_1.UserRoutes);
+// application routes
+app.use('/api/v1', routes_1.default);
 const getAController = (req, res) => {
     res.send('Hello World!');
 };
