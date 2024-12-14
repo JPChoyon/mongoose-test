@@ -3,6 +3,7 @@ import AppError from '../../errors/AppError';
 import { Student } from './student.model';
 import httpStatus from 'http-status-codes';
 import { UserModel } from '../users/user.model';
+import { TStudent } from './student.interface';
 
 const studentFindDb = async () => {
   const result = await Student.find()
