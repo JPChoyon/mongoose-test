@@ -3,6 +3,7 @@ import { UserRoutes } from '../modules/users/user.router';
 import { StudentRoutes } from '../modules/student/student.route';
 import { AcademicSemesterRoutes } from '../modules/academicSemester/academicSemester.router';
 import { AcademicDepartmentRoutes } from '../modules/academicDepartment/academicDepartment.route';
+import { AcademicFacultyRoutes } from '../modules/academicFaculty/academicFaculty.route';
 
 
 const router = Router();
