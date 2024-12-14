@@ -94,6 +94,7 @@ const studentSchema = new Schema<TStudent>(
       type: String,
       required: [true, 'Email is required.'],
       match: [/^\S+@\S+\.\S+$/, 'Invalid email format.'],
+      unique: true,
     },
     dateOfBirth: {
       type: String,
@@ -134,15 +135,40 @@ const studentSchema = new Schema<TStudent>(
     profileImg: { type: String },
     isDeleted: { type: Boolean, default: false },
   },
+
   {
+    toJSON: {
+      virtuals: true,
+    },
     timestamps: true,
     versionKey: false,
   },
 );
-// creating a static method
-studentSchema.statics.isStudentExist = async function (id: string) {
-  const existingStudent = await Student.findOne({ id });
-  return existingStudent;
+// virtual
+studentSchema.virtual('fullName').get(function () {
+  return this.name.firstName + this.name.middleName + this.name.lastName;
+});
+
+// Query Middleware
+studentSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+studentSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+studentSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
+
+//creating a custom static method
+studentSchema.statics.isUserExists = async function (id: string) {
+  const existingUser = await Student.findOne({ id });
+  return existingUser;
 };
 
 // create model

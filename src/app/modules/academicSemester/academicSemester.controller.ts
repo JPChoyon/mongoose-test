@@ -24,7 +24,7 @@ const findAcademicSemester = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic Semester is created successfully',
+    message: 'Academic Semester are retrieve successfully',
     data: result,
   });
 });
@@ -61,3 +61,6 @@ export const academicSemesterController = {
   findOneAcademicSemester,
   updateAcademicSemester,
 };
+function next(err: any) {
+  throw new Error('Function not implemented.');
+}

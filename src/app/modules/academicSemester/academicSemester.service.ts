@@ -1,4 +1,7 @@
-import { academicSemesterNameMapper, TAcademicSemester } from './academicSemester.interface';
+import {
+  academicSemesterNameMapper,
+  TAcademicSemester,
+} from './academicSemester.interface';
 import { academicSemester } from './academicSemester.model';
 
 const academicSemesterCreateDB = async (payload: TAcademicSemester) => {
@@ -28,7 +31,6 @@ const updateAcademicSemesterIntoDB = async (
   ) {
     throw new Error('Invalid Semester Code');
   }
-
   const result = await academicSemester.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   });
